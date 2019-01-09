@@ -29,15 +29,22 @@ export default class Container extends Component {
                     }
                 });
             })
-            .catch(err => console.log(err));
+            .catch(err => alert(err.response.request.response));
     }
 
     getAllTreasure() {
-        // axios GET to /api/treasure/all here
+        //
     }
 
     getMyTreasure() {
-        // axios GET to /api/treasure/user here
+        axios
+            .get("/api/treasure/user")
+            .then(treasure => {
+                this.setState({
+                    treasures: { ...this.state.treasures, user: treasure.data }
+                });
+            })
+            .catch(err => console.log(err));
     }
 
     addMyTreasure(newMyTreasure) {
