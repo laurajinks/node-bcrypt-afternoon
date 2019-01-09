@@ -6,7 +6,7 @@ const { json } = require("body-parser");
 const port = 4000;
 const CONNECTION_STRING = process.env.CONNECTION_STRING;
 const SESSION_SECRET = process.env.SESSION_SECRET;
-const { register } = require("./controllers/authController");
+const { register, login } = require("./controllers/authController");
 
 const app = express();
 app.use(json());
@@ -27,5 +27,6 @@ app.use(
 );
 
 app.post("/auth/register", register);
+app.post("/auth/login", login);
 
 app.listen(port, console.log(`listening on ${port}`));
