@@ -7,6 +7,11 @@ const port = 4000;
 const CONNECTION_STRING = process.env.CONNECTION_STRING;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 const { register, login, logout } = require("./controllers/authController");
+const {
+    dragonTreasure,
+    getUserTreasure
+} = require("./controllers/treasureController");
+const { usersOnly } = require("./middleware/authMiddleware");
 
 const app = express();
 app.use(json());
@@ -29,5 +34,7 @@ app.use(
 app.post("/auth/register", register);
 app.post("/auth/login", login);
 app.get("/auth/logout", logout);
+app.get("/api/treasure/dragon", dragonTreasure);
+app.get("/api/treasure/user", usersOnly, getUserTreasure);
 
 app.listen(port, console.log(`listening on ${port}`));
