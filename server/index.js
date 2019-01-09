@@ -10,9 +10,10 @@ const { register, login, logout } = require("./controllers/authController");
 const {
     dragonTreasure,
     getUserTreasure,
-    addMyTreasure
+    addMyTreasure,
+    getAllTreasure
 } = require("./controllers/treasureController");
-const { usersOnly } = require("./middleware/authMiddleware");
+const { usersOnly, adminsOnly } = require("./middleware/authMiddleware");
 
 const app = express();
 app.use(json());
@@ -38,5 +39,6 @@ app.get("/auth/logout", logout);
 app.get("/api/treasure/dragon", dragonTreasure);
 app.get("/api/treasure/user", usersOnly, getUserTreasure);
 app.post("/api/treasure/user", usersOnly, addMyTreasure);
+app.get("/api/treasure/all", usersOnly, adminsOnly, getAllTreasure);
 
 app.listen(port, console.log(`listening on ${port}`));

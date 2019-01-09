@@ -16,6 +16,11 @@ module.exports = {
                         .register_user(isAdmin, username, hash)
                         .then(response => {
                             const user = response[0];
+                            req.session.user = {
+                                isAdmin: user.is_admin,
+                                id: user.id,
+                                username: user.username
+                            };
                             res.status(201).json(user);
                         });
                 }

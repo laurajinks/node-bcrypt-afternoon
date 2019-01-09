@@ -33,7 +33,14 @@ export default class Container extends Component {
     }
 
     getAllTreasure() {
-        //
+        axios
+            .get("/api/treasure/all")
+            .then(response => {
+                this.setState({
+                    treasures: { ...this.state.treasures, all: response.data }
+                });
+            })
+            .catch(err => alert(err.response.request.response));
     }
 
     getMyTreasure() {

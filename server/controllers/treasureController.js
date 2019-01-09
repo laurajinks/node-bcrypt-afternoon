@@ -22,5 +22,12 @@ module.exports = {
             .get("db")
             .add_user_treasure([treasureURL, id])
             .then(response => res.status(200).json(response));
+    },
+
+    getAllTreasure: (req, res) => {
+        req.app
+            .get("db")
+            .get_all_treasure()
+            .then(response => res.status(200).json(response));
     }
 };
