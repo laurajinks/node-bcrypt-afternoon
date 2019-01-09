@@ -13,5 +13,14 @@ module.exports = {
             .get("db")
             .get_user_treasure(req.session.user.id)
             .then(response => res.status(200).json(response));
+    },
+
+    addMyTreasure: (req, res) => {
+        const { treasureURL } = req.body;
+        const { id } = req.session.user;
+        req.app
+            .get("db")
+            .add_user_treasure([treasureURL, id])
+            .then(response => res.status(200).json(response));
     }
 };

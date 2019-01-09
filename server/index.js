@@ -9,7 +9,8 @@ const SESSION_SECRET = process.env.SESSION_SECRET;
 const { register, login, logout } = require("./controllers/authController");
 const {
     dragonTreasure,
-    getUserTreasure
+    getUserTreasure,
+    addMyTreasure
 } = require("./controllers/treasureController");
 const { usersOnly } = require("./middleware/authMiddleware");
 
@@ -36,5 +37,6 @@ app.post("/auth/login", login);
 app.get("/auth/logout", logout);
 app.get("/api/treasure/dragon", dragonTreasure);
 app.get("/api/treasure/user", usersOnly, getUserTreasure);
+app.post("/api/treasure/user", usersOnly, addMyTreasure);
 
 app.listen(port, console.log(`listening on ${port}`));
